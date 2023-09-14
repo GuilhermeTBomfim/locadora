@@ -1,0 +1,4 @@
+venv/
+.venv/
+.editorconfig
+__pycache__/
