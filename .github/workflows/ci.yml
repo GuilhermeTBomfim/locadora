@@ -11,15 +11,22 @@ jobs:
       - name: Check code
         uses: actions/checkout@v3
       - name: Commitsar check
-        uses: docker://aevea/commitsar
-        env: 
-          GIT_DEPTH: 0
+        uses: aevea/commitsar
       - name: Setup Python
         uses: actions/setup-python@v3
         with:
           python-version: ${{ matrix.version }}
+  tests:
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix: 
+        version: [3.8, 3.9, 3.10, 3.11]
+    steps:
       - name: Test
         run: pytest
+  environment-devlopement:
+    runs-on: ubuntu-22.04
+    steps:
       - name: Enviroment developement
         uses: isbang/compose-action@v1.5.1
         with:
@@ -29,4 +36,3 @@ jobs:
             app
             nginx
             database
-      
