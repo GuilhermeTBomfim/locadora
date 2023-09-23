@@ -16,17 +16,8 @@ jobs:
         uses: actions/setup-python@v3
         with:
           python-version: ${{ matrix.version }}
-  tests:
-    runs-on: ubuntu-22.04
-    strategy:
-      matrix: 
-        version: [3.8, 3.9, 3.10, 3.11]
-    steps:
       - name: Test
         run: pytest
-  environment-devlopement:
-    runs-on: ubuntu-22.04
-    steps:
       - name: Enviroment developement
         uses: isbang/compose-action@v1.5.1
         with:
