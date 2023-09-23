@@ -1,8 +1,5 @@
 name: locadora-workflow
-on:
-  pull_request:
-    branches:
-      - developer
+on: pull_request
 
 jobs:
   check-app:
