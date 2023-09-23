@@ -2,22 +2,36 @@ name: locadora-workflow
 on: pull_request
 
 jobs:
-  check-app:
+  check-commits:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Commitsar check
+        uses: aevea/commitsar@v0.13.0
+        env: 
+          GIT_DEPTH: 0
+
+  tests:
     runs-on: ubuntu-22.04
     strategy:
       matrix: 
         version: [3.8, 3.9, 3.10, 3.11]
     steps:
-      - name: Check code
+      - name: Checkout code
         uses: actions/checkout@v3
-      - name: Commitsar check
-        uses: aevea/commitsar
       - name: Setup Python
         uses: actions/setup-python@v3
         with:
           python-version: ${{ matrix.version }}
       - name: Test
         run: pytest
+
+  environment-devlopement:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
       - name: Enviroment developement
         uses: isbang/compose-action@v1.5.1
         with:
