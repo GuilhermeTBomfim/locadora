@@ -6,3 +6,4 @@ app = FastAPI()
 def api():
     welcome: str = 1
     return welcome
+
