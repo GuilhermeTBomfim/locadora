@@ -9,8 +9,6 @@ jobs:
         uses: actions/checkout@v3
       - name: Commitsar check
         uses: aevea/commitsar@v0.13.0
-        env: 
-          GIT_DEPTH: 0
 
   tests:
     runs-on: ubuntu-22.04
