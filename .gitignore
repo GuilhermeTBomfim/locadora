@@ -2,3 +2,7 @@ venv/
 .venv/
 .editorconfig
 __pycache__/
+.pytest_cache
+mysql/*
+proxy/*
+DS_STORE
