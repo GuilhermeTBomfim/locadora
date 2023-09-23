@@ -4,4 +4,5 @@ app = FastAPI()
 
 @app.get('/api/')
 def api():
-    return 'Pronto'
+    welcome: str = 1
+    return welcome
