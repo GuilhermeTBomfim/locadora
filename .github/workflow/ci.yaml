@@ -1,0 +1,33 @@
+name: locadora-workflow
+on:
+  pull_request:
+    branches:
+      - developer
+
+jobs:
+  check-app:
+    run-on: ubuntu-22.04
+    strategy:
+      matrix: 
+        version: [3.8, 3.9, 3.10, 3.11]
+    steps:
+      - name: Check code
+        uses: actions/checkout@v2
+      - name: Commitsar check
+        uses: docker://aevea/commitsar
+      - name: Setup Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: ${{ matrix.version }}
+      - name: Test
+        run: pytest
+      - name: Enviroment developement
+        uses: isbang/compose-action@v1.5.1
+        with:
+          compose-file: "./docker/docker-compose.yml"
+          down-flags: "--volumes"
+          services: |
+            app
+            nginx
+            database
+      
