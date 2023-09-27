@@ -1,6 +1,6 @@
 FROM python:3.9
 WORKDIR /code
-COPY ../requirements.docker.txt ./requirements.txt
+COPY ./requirements.docker.txt ./requirements.txt
 RUN pip install --no-cache-dir --upgrade -r ./requirements.txt
 RUN sudo curl --output /usr/share/keyrings/nginx-keyring.gpg  \
     https://unit.nginx.org/keys/nginx-keyring.gpg
