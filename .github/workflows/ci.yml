@@ -39,5 +39,5 @@ jobs:
           down-flags: "--volumes"
           services: |
             app
-            nginx
+            proxy
             database
