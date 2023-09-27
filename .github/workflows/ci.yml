@@ -9,10 +9,9 @@ jobs:
         uses: actions/checkout@v1
       - name: Commitsar check
         uses: docker://aevea/commitsar
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
         env:
           GIT_DEPTH: 1
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   tests:
     runs-on: ubuntu-22.04
