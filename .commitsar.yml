@@ -1,8 +1,8 @@
 version: 1
-verbose: true
+verbose: false
 commits:
   disabled: false
-  strict: true
+  strict: false
   limit: 0
   all: false
   upstreamBranch: origin/developer
