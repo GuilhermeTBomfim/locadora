@@ -11,7 +11,7 @@ RUN sudo apt update && \
     sudo apt install unit-dev unit-jsc17 unit-perl  \
          unit-php unit-python3.9 unit-ruby unit-wasm && \
     sudo systemctl restart unit
-COPY ../src /code/app
+COPY ../src/ /code/app
 RUN chown -R unit:unit /code/app
 # , "--proxy-headers"
 ENTRYPOINT [ "uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload" ]
