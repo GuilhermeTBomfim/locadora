@@ -25,7 +25,7 @@ jobs:
         with:
           python-version: ${{ matrix.version }}
       - name: Test
-        run: pip install -r requeriments.txt && pytest
+        run: pip install -r requirements.txt && pytest
 
   environment-devlopement:
     runs-on: ubuntu-22.04
