@@ -6,9 +6,9 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v1
       - name: Commitsar check
-        uses: aevea/commitsar@v0.13.0
+        uses: docker://aevea/commitsar
         env:
           GIT_DEPTH: 1
 
@@ -31,7 +31,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout code
-        uses: actions/checkout@v1
+        uses: actions/checkout@v3
       - name: Enviroment developement
         uses: isbang/compose-action@v1.5.1
         with:
