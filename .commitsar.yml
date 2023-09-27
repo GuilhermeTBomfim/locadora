@@ -1,0 +1,10 @@
+version: 1
+verbose: false
+commits:
+  disabled: false
+  strict: false
+  limit: 0
+  all: false
+  upstreamBranch: origin/developer
+pull_request:
+  conventional: true

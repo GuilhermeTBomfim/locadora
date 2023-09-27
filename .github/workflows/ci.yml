@@ -2,29 +2,50 @@ name: locadora-workflow
 on: pull_request
 
 jobs:
-  check-app:
+  check-commits:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha }}
+      - name: Commitsar check
+        uses: docker://aevea/commitsar
+        env:
+          GIT_DEPTH: 1
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  tests:
     runs-on: ubuntu-22.04
     strategy:
       matrix: 
-        version: [3.8, 3.9, 3.10, 3.11]
+        version: [3.8, 3.9, 3.11]
     steps:
-      - name: Check code
-        uses: actions/checkout@v2
-      - name: Commitsar check
-        uses: docker://aevea/commitsar
+      - name: Checkout code
+        uses: actions/checkout@v3
       - name: Setup Python
         uses: actions/setup-python@v3
         with:
           python-version: ${{ matrix.version }}
       - name: Test
-        run: pytest
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install -e .
+          python -m pytest --import-mode=append test
+
+  environment-devlopement:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
       - name: Enviroment developement
         uses: isbang/compose-action@v1.5.1
         with:
-          compose-file: "./docker/docker-compose.yml"
+          compose-file: "./docker-compose.yml"
           down-flags: "--volumes"
           services: |
             app
-            nginx
+            proxy
             database
-      
